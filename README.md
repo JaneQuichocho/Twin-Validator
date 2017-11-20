@@ -3,3 +3,4 @@
 ## team members
 - ellani johnson
  - Stephanie Lim
+ - Jane Quichocho
