@@ -2,3 +2,4 @@
 
 ## team members
 - ellani johnson
+ - Stephanie Lim
