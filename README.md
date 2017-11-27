@@ -6,7 +6,7 @@
  - Jane Quichocho
 #### A short description of our project. 
 What will our app do? 
-Our web application will use the Microsoft Azure Face API (https://azure.microsoft.com/en-us/services/cognitive-services/face/) and a Webcam API to compare a picture the user takes on their webcam to a picture of a celebrity they upload to the site. The user will upload a photo by providing an absolute url to the photo or choosing a photo stored on their computer.
+Our web application will use the Microsoft Azure Face API (https://azure.microsoft.com/en-us/services/cognitive-services/face/) and a Webcam API to compare a picture the user takes on his/her webcam to a picture of a celebrity they upload to the site. The user will upload a photo by providing an absolute url to the photo or choosing a photo stored on their computer.
 
 Who would use our app?
 Anyone who thinks they have a doppleganger and wants to test out how much they look alike.
