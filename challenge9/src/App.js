@@ -38,11 +38,13 @@ class App extends Component {
       </div>
     );
   }
+
   changeWebcamState(webcamState) {
     this.setState({
       isWebcamInactive: webcamState
     });
   }
+
   /*getSimilarityCorrelation(imageURL) {
     var url = URI_BASE + "?" + JSON.stringify(params);
     var faceId = "";
