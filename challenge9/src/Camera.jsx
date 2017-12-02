@@ -5,12 +5,11 @@ var localStream;
 class Camera extends Component {
 
     render() {
-        // const {goBack} = this.props.navigation;
         return (
             <div className="col-md-6 col-sm-12">
                 <video ref="camera" className="camera"></video>
                 <canvas ref="imageHolder" className="hidden"></canvas>
-                <img ref="image" className="hidden"/>
+                <img ref="image" src="" alt="snapshot" className="hidden" />
                 {this.props.webcamState ? (
                     <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
                 ): (
@@ -69,8 +68,6 @@ class Camera extends Component {
         context.drawImage(video, 0, 0, video.width, video.height);
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
-
-        localStorage.setItem("img", data);
         
     }
 
