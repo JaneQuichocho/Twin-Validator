@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.camera {
+  background-color: lightgray;
+  width: 30vw;
+  height: 30vh;
+  margin-top: 10px;
+}
