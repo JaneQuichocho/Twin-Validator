@@ -1,8 +1,8 @@
-
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Camera from "./Camera";
+import UploadPicture from "./UploadPicture";
 
 var API_KEY = "0662a50e56ca49f7a737fcc315c536fa";
 var URI_BASE = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
@@ -20,89 +20,88 @@ var faceId2 = "";
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-        isWebcamInactive: true
+    constructor(props) {
+        super(props);
+        this.state = {
+            isWebcamInactive: true
+        }
     }
-}
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Who's Your Celebrity Doppleganger?</h1>
-        </header>
-        {/* <div>
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <h1 className="App-title">Who's Your Celebrity Doppleganger?</h1>
+                </header>
+                {/* <div>
           <p ref="similarityCorrelation">This should change.</p>
           <button onClick={(e) => this.getFaceId(celebrityImageUrl)}>Click this</button>
         </div> */}
-        <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} />
-
-        <button onClick={(faceId1) => this.getFaceId(userImageUrl, true)}>TEST</button>
-      </div>
-    );
-  }
-
-  changeWebcamState(webcamState) {
-    this.setState({
-      isWebcamInactive: webcamState
-    });
-  }
-
-  getFaceId(imageURL, isFaceId1) {
-    var url = URI_BASE + "?" + params;
-    var faceId = "";
-    var headers = new Headers();
-    headers.append('Ocp-Apim-Subscription-Key', API_KEY);
-    headers.append('Content-Type', 'application/json');
-
-    var request = new Request(url, {
-      method: "POST",
-      headers: headers,
-      mode: "cors",
-      body: JSON.stringify({url: imageURL})
-    })
-    if (isFaceId1) {
-      faceId1 = this.APIFetch(request);
-      console.log(faceId1);
-    } else {
-      faceId2 = this.APIFetch(request);
-      console.log("faceId2");
+                <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} />
+                <button onClick={() => this.getFaceId(userImageUrl, true)}>TEST</button>
+                <UploadPicture />
+            </div>
+        );
     }
-  }
 
-  verifyFace(faceId1, faceId2) {
-    var url = URI_BASE_VERIFY + "?" + params;
-    var headers = new Headers();
-    headers.append('Ocp-Apim-Subscription-Key', API_KEY);
-    headers.append('Content-Type', 'application/json');
-    
-    var request = new Request(url, {
-      method: "POST",
-      headers: headers,
-      mode: "cors",
-      faceId1: faceId1,
-      faceId2: faceId2
-    })
-    this.APIFetch(request);
-  }
+    changeWebcamState(webcamState) {
+        this.setState({
+            isWebcamInactive: webcamState
+        });
+    }
 
-  APIFetch(request) {
-    var result = "";
-    fetch(request)
-      .then((response) => {  
-      return response.json();
-      })
-      .then(function (json) {
-        result = json[0].faceId;
-        return result;
-      })
-      .then(() => {
-      return result;
-      })
-  }
+    getFaceId(imageURL, isFaceId1) {
+        var url = URI_BASE + "?" + params;
+        var faceId = "";
+        var headers = new Headers();
+        headers.append('Ocp-Apim-Subscription-Key', API_KEY);
+        headers.append('Content-Type', 'application/json');
 
+        var request = new Request(url, {
+            method: "POST",
+            headers: headers,
+            mode: "cors",
+            body: JSON.stringify({ url: imageURL })
+        })
+        if (isFaceId1) {
+            faceId1 = this.APIFetch(request);
+            console.log(faceId1);
+        } else {
+            faceId2 = this.APIFetch(request);
+            console.log("faceId2");
+        }
+    }
+
+    verifyFace(faceId1, faceId2) {
+        var url = URI_BASE_VERIFY + "?" + params;
+        var headers = new Headers();
+        headers.append('Ocp-Apim-Subscription-Key', API_KEY);
+        headers.append('Content-Type', 'application/json');
+
+        var request = new Request(url, {
+            method: "POST",
+            headers: headers,
+            mode: "cors",
+            faceId1: faceId1,
+            faceId2: faceId2
+        })
+        this.APIFetch(request);
+    }
+
+    APIFetch(request) {
+        var result = "";
+        fetch(request)
+            .then((response) => {
+                return response.json();
+            })
+            .then(function (json) {
+                result = json[0].faceId;
+            })
+            .catch(() => {
+                alert("Error occured. Please try again.");
+                return result;
+            });
+    }
 }
 export default App;

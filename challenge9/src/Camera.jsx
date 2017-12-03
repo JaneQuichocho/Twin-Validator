@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UploadPicture from "./UploadPicture";
 
 var localStream;
 
@@ -12,13 +13,13 @@ class Camera extends Component {
                 <img ref="image" src="" alt="snapshot" className="hidden" />
                 {this.props.webcamState ? (
                     <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
-                ): (
-                    <div>
-                        <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
-                        <button ref="takePicButton" onClick={(e) => this.handleTakePicButton(e)} className="btn btn-default">Take Picture</button>
-                        <button ref="usePicButton" onClick={(e) => this.handleUsePicButton(e)} className="btn btn-default hidden">Use Picture</button>
-                    </div>
-                )
+                ) : (
+                        <div>
+                            <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
+                            <button ref="takePicButton" onClick={(e) => this.handleTakePicButton(e)} className="btn btn-default">Take Picture</button>
+                            <button ref="usePicButton" onClick={(e) => this.handleUsePicButton(e)} className="btn btn-default hidden">Use Picture</button>
+                        </div>
+                    )
                 }
             </div>
         );
@@ -43,11 +44,11 @@ class Camera extends Component {
     handleCancelButton(e) {
         e.preventDefault();
         var video = this.refs.camera;
-        this.props.onClick(true);   
+        this.props.onClick(true);
         // takes out video streaming
         video.srcObject = null;
         // turns off camera
-        localStream.getTracks().forEach(function(track) {
+        localStream.getTracks().forEach(function (track) {
             track.stop();
         });
     }
@@ -56,7 +57,7 @@ class Camera extends Component {
         e.preventDefault();
         var video = this.refs.camera;
         video.pause();
-        localStream.getTracks().forEach(function(track) {
+        localStream.getTracks().forEach(function (track) {
             track.stop();
         });
         this.refs.takePicButton.classList.add("hidden");
@@ -68,7 +69,7 @@ class Camera extends Component {
         context.drawImage(video, 0, 0, video.width, video.height);
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
-        
+
     }
 
     // give pic to api (connecting it)
