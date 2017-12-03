@@ -10,7 +10,7 @@ class UploadPicture extends Component {
                 <form>
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>
-
+                    {!this.props.isCelebrity && (<button ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>)}
                 </form>
 
             </div>
@@ -34,7 +34,11 @@ class UploadPicture extends Component {
                 alert("Invalid image. Please try again.");
             }  
         });
-    }   
+    } 
+    handleGoBackButton(e) {
+        e.preventDefault();
+        this.props.goBackToWebcam(false);
+    }  
 }
 export default UploadPicture;
 

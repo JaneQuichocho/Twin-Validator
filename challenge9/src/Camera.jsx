@@ -12,7 +12,11 @@ class Camera extends Component {
                 <canvas ref="imageHolder" className="hidden"></canvas>
                 <img ref="image" src="" alt="snapshot" className="hidden" />
                 {this.props.webcamState ? (
-                    <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
+                    <div>
+                        <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
+                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Upload Picture</button>
+                    </div>
+
                 ) : (
                         <div>
                             <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
@@ -77,6 +81,9 @@ class Camera extends Component {
         e.preventDefault();
     }
 
+    handleUploadButton(e) {
+        this.props.useUploadedPicture(true);
+    }
 }
 
 export default Camera;

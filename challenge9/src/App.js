@@ -23,8 +23,11 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isWebcamInactive: true
+            isWebcamInactive: true,
+            isUploading: false
+
         }
+
     }
 
     render() {
@@ -38,9 +41,14 @@ class App extends Component {
           <p ref="similarityCorrelation">This should change.</p>
           <button onClick={(e) => this.getFaceId(celebrityImageUrl)}>Click this</button>
         </div> */}
-                <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} />
-                <button onClick={() => this.getFaceId(userImageUrl, true)}>TEST</button>
-                <UploadPicture />
+
+                {this.state.isUploading ? ( //if true, upload
+                    <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} />
+                ) : ( //if false
+                    <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading)} />
+                    )
+                }
+                <UploadPicture isCelebrity={true}/>
             </div>
         );
     }
@@ -102,6 +110,9 @@ class App extends Component {
                 alert("Error occured. Please try again.");
                 return result;
             });
+    }
+    useUploadedPicture(isUploading) {
+        this.setState({ isUploading: isUploading })
     }
 }
 export default App;
