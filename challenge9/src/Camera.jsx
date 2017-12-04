@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import UploadPicture from "./UploadPicture";
 
 var localStream;
-
+var bob;
 class Camera extends Component {
 
     render() {
@@ -16,7 +16,6 @@ class Camera extends Component {
                         <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
                         <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Upload Picture</button>
                     </div>
-
                 ) : (
                         <div>
                             <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
@@ -42,7 +41,6 @@ class Camera extends Component {
             })
             .catch(function (error) {
                 window.alert("Error occured. Please try again.");
-                console.log(error.message);
             }); 
     }
 
@@ -77,13 +75,14 @@ class Camera extends Component {
 
         canvas.toBlob((blob) => {
             this.props.passFaceURL(blob);
+            bob = blob;
         })
     }
-
 
     // give pic to api (connecting it)
     handleUsePicButton(e) {
         e.preventDefault();
+        console.log(URL.createObjectURL(bob));
     }
 
     handleUploadButton(e) {
