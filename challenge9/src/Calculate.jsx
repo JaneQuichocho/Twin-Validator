@@ -26,17 +26,16 @@ class Calculate extends Component {
                     faceId1 = result[0].faceId;
                     console.log(faceId1);
                 }
-                this.getFaceId(this.props.faceURL2, (result) => {
-                    if (result !== null) {
-                        faceId2 = result[0].faceId;
-                        console.log(faceId2);
-                    } 
-                    /*this.verifyFace(faceId1, faceId2, (result) => {
-                        console.log(result);
-                    });*/
-                });
             });
-            
+            this.getFaceId(this.props.faceURL2, (result) => {
+                if (result !== null) {
+                    faceId2 = result[0].faceId;
+                    console.log(faceId2);
+                } 
+                this.verifyFace(faceId1, faceId2, (result2) => {
+                    console.log(result2);
+                })
+            });
         }
     }
 
