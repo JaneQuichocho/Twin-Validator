@@ -14,13 +14,12 @@ class Camera extends Component {
                 {this.props.webcamState ? (
                     <div>
                         <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
-                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Upload Picture</button>
+                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Input Picture URL</button>
                     </div>
                 ) : (
                         <div>
                             <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
                             <button ref="takePicButton" onClick={(e) => this.handleTakePicButton(e)} className="btn btn-default">Take Picture</button>
-                            <button ref="usePicButton" onClick={(e) => this.handleUsePicButton(e)} className="btn btn-default hidden">Use Picture</button>
                         </div>
                     )
                 }
@@ -64,12 +63,13 @@ class Camera extends Component {
             track.stop();
         });
         this.refs.takePicButton.classList.add("hidden");
-        this.refs.usePicButton.classList.remove("hidden");
 
         var canvas = this.refs.imageHolder;
+        canvas.setAttribute("height", video.clientHeight);
+        canvas.setAttribute("width", video.clientWidth);
         var photo = this.refs.image;
         var context = canvas.getContext("2d");
-        context.drawImage(video, 0, 0, video.width, video.height);
+        context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
 
@@ -77,12 +77,7 @@ class Camera extends Component {
             this.props.passFaceURL(blob);
             bob = blob;
         })
-    }
-
-    // give pic to api (connecting it)
-    handleUsePicButton(e) {
-        e.preventDefault();
-        console.log(URL.createObjectURL(bob));
+        
     }
 
     handleUploadButton(e) {
