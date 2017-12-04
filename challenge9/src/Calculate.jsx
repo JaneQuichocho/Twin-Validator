@@ -13,30 +13,31 @@ class Calculate extends Component {
         return (
             <div>
                 <button ref="calculateButton" onClick={(e) => this.handleCalculateButton(e)} className="btn btn-success">Calculate Similarity!</button>
-                <h4>We are % confident that these two faces are similar.</h4>
+                <h4 ref="confidenceLevel">We are % confident that these two faces are similar.</h4>
             </div>
         );
     }
 
     handleCalculateButton(e) {
         e.preventDefault();
+        var componentObject = this;
         if (this.props.hasTwoPictures) {
             this.getFaceId(this.props.faceURL1, (result) => {
                 if (result !== null) {
                     faceId1 = result[0].faceId;
                     console.log(faceId1);
                 }
-                this.getFaceId(this.props.faceURL2, (result) => {
-                    if (result !== null) {
-                        faceId2 = result[0].faceId;
-                        console.log(faceId2);
-                    } 
-                    /*this.verifyFace(faceId1, faceId2, (result) => {
-                        console.log(result);
-                    });*/
-                });
             });
-            
+            this.getFaceId(this.props.faceURL2, (result) => {
+                if (result !== null) {
+                    faceId2 = result[0].faceId;
+                    console.log(faceId2);
+                } 
+                this.verifyFace(faceId1, faceId2, (result2) => {
+                    console.log(result2.confidence);
+                    componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence*100)) + "% confident these two faces are similar.";
+                })
+            });
         }
     }
 
