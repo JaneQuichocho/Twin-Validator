@@ -30,8 +30,10 @@ class UploadPicture extends Component {
             if (exists) {
                 this.refs.uploadImage.src = url;
                 this.refs.textBox.value = "";
+                this.props.passFaceURL(url, this.props.isCelebrity);
             } else {
                 alert("Invalid image. Please try again.");
+                this.props.passFaceURL(null, this.props.isCelebrity);
             }  
         });
     } 
