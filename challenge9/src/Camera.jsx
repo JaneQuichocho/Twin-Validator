@@ -14,13 +14,12 @@ class Camera extends Component {
                 {this.props.webcamState ? (
                     <div>
                         <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
-                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Upload Picture</button>
+                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Input Picture URL</button>
                     </div>
                 ) : (
                         <div>
                             <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
                             <button ref="takePicButton" onClick={(e) => this.handleTakePicButton(e)} className="btn btn-default">Take Picture</button>
-                            <button ref="usePicButton" onClick={(e) => this.handleUsePicButton(e)} className="btn btn-default hidden">Use Picture</button>
                         </div>
                     )
                 }
@@ -64,7 +63,6 @@ class Camera extends Component {
             track.stop();
         });
         this.refs.takePicButton.classList.add("hidden");
-        this.refs.usePicButton.classList.remove("hidden");
 
         var canvas = this.refs.imageHolder;
         canvas.setAttribute("height", video.clientHeight);
@@ -75,20 +73,11 @@ class Camera extends Component {
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
 
-        console.log(video.clientWidth);
-        console.log(video.clientHeight);
-        console.log(video);
         canvas.toBlob((blob) => {
             this.props.passFaceURL(blob);
             bob = blob;
         })
         
-    }
-
-    // give pic to api (connecting it)
-    handleUsePicButton(e) {
-        e.preventDefault();
-        console.log(URL.createObjectURL(bob));
     }
 
     handleUploadButton(e) {

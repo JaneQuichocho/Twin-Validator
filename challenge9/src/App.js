@@ -5,8 +5,6 @@ import Camera from "./Camera";
 import UploadPicture from "./UploadPicture";
 import Calculate from "./Calculate";
 
-var test;
-
 class App extends Component {
 
     constructor(props) {
@@ -34,7 +32,7 @@ class App extends Component {
                     )
                 }
                 <UploadPicture isCelebrity={true} passFaceURL={(url, isCelebrity) => this.setUrl(url, isCelebrity)} />
-                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} />
+                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} isUsingBlob={this.state.isUploading}/>
             </div>
         );
     }
@@ -56,8 +54,6 @@ class App extends Component {
         }
     }
 
-
-    
   changeWebcamState(webcamState) {
     this.setState({
       isWebcamInactive: webcamState
