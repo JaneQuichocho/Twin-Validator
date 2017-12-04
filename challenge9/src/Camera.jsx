@@ -73,7 +73,6 @@ class Camera extends Component {
         context.drawImage(video, 0, 0, video.width, video.height);
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
-
     }
 
     // give pic to api (connecting it)

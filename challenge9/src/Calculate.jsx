@@ -22,22 +22,26 @@ class Calculate extends Component {
         e.preventDefault();
         var componentObject = this;
         if (this.props.hasTwoPictures) {
-            this.getFaceId(this.props.faceURL1, (result) => {
-                if (result !== null) {
+            this.getFaceId(this.props.faceURL1, (result, hasError) => {
+                if (!hasError) {
                     faceId1 = result[0].faceId;
-                    console.log(faceId1);
+                    this.getFaceId(this.props.faceURL2, (result, hasError) => {
+                        if (!hasError) {
+                            faceId2 = result[0].faceId;
+                        }
+                        if (faceId2 !== "") {
+                            this.verifyFace(faceId1, faceId2, (result2, hasError) => {
+                                if (!hasError) {
+                                    componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence * 100)) + "% confident these two faces are similar.";
+                                }
+                            })
+                        }
+
+                    });
                 }
+
             });
-            this.getFaceId(this.props.faceURL2, (result) => {
-                if (result !== null) {
-                    faceId2 = result[0].faceId;
-                    console.log(faceId2);
-                } 
-                this.verifyFace(faceId1, faceId2, (result2) => {
-                    console.log(result2.confidence);
-                    componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence*100)) + "% confident these two faces are similar.";
-                })
-            });
+
         }
     }
 
@@ -72,7 +76,7 @@ class Calculate extends Component {
             method: "POST",
             headers: headers,
             mode: "cors",
-            body: JSON.stringify({faceId1: faceId1, faceId2: faceId2})
+            body: JSON.stringify({ faceId1: faceId1, faceId2: faceId2 })
         })
         this.APIFetch(request, callback);
     }
@@ -85,13 +89,12 @@ class Calculate extends Component {
             })
             .then(function (json) {
                 result = json;
-                callback(result);
+                callback(result, false);
             })
             .catch((error) => {
-                console.log(error.message);
-                alert("Error occurred. Please try again.");
+                alert("No face detected. Please try again.");
+                callback(result, true);
             });
     }
 }
-
 export default Calculate;
