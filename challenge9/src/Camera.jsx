@@ -41,8 +41,9 @@ class Camera extends Component {
                 localStream = stream;
             })
             .catch(function (error) {
-                window.alert("Error occurred; please try again.");
-            });
+                window.alert("Error occured. Please try again.");
+                console.log(error.message);
+            }); 
     }
 
     handleCancelButton(e) {
@@ -74,7 +75,11 @@ class Camera extends Component {
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
 
+        canvas.toBlob((blob) => {
+            this.props.passFaceURL(blob);
+        })
     }
+
 
     // give pic to api (connecting it)
     handleUsePicButton(e) {
