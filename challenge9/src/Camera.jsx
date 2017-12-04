@@ -67,16 +67,22 @@ class Camera extends Component {
         this.refs.usePicButton.classList.remove("hidden");
 
         var canvas = this.refs.imageHolder;
+        canvas.setAttribute("height", video.clientHeight);
+        canvas.setAttribute("width", video.clientWidth);
         var photo = this.refs.image;
         var context = canvas.getContext("2d");
-        context.drawImage(video, 0, 0, video.width, video.height);
+        context.drawImage(video, 0, 0, video.clientWidth, video.clientHeight);
         var data = canvas.toDataURL("image/png");
         photo.setAttribute("src", data);
 
+        console.log(video.clientWidth);
+        console.log(video.clientHeight);
+        console.log(video);
         canvas.toBlob((blob) => {
             this.props.passFaceURL(blob);
             bob = blob;
         })
+        
     }
 
     // give pic to api (connecting it)

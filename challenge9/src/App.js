@@ -5,6 +5,8 @@ import Camera from "./Camera";
 import UploadPicture from "./UploadPicture";
 import Calculate from "./Calculate";
 
+var test;
+
 class App extends Component {
 
     constructor(props) {

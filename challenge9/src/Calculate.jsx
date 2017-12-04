@@ -22,7 +22,7 @@ class Calculate extends Component {
         e.preventDefault();
         var componentObject = this;
         if (this.props.hasTwoPictures) {
-            this.getFaceId(this.props.faceURL1, (result, hasError) => {
+            this.getFaceIdFromBlob(this.props.faceURL1, (result, hasError) => {
                 if (!hasError) {
                     faceId1 = result[0].faceId;
                     this.getFaceId(this.props.faceURL2, (result, hasError) => {
@@ -62,6 +62,21 @@ class Calculate extends Component {
             headers: headers,
             mode: "cors",
             body: JSON.stringify({ url: imageURL })
+        })
+        this.APIFetch(request, callback);
+    }
+
+    getFaceIdFromBlob(blob, callback) {
+        var url = URI_BASE + "?" + params;
+        var headers = new Headers();
+        headers.append('Ocp-Apim-Subscription-Key', API_KEY);
+        headers.append('Content-Type', 'application/octet-stream');
+
+        var request = new Request(url, {
+            method: "POST",
+            headers: headers,
+            mode: "cors",
+            body: blob
         })
         this.APIFetch(request, callback);
     }
