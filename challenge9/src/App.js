@@ -54,6 +54,8 @@ class App extends Component {
         }
     }
 
+
+    
   changeWebcamState(webcamState) {
     this.setState({
       isWebcamInactive: webcamState
