@@ -22,25 +22,25 @@ class Calculate extends Component {
         e.preventDefault();
         var componentObject = this;
         if (this.props.hasTwoPictures) {
-                this.getFaceId(this.props.faceURL1, (result, hasError) => {
-                    if (!hasError) {
-                        faceId1 = result[0].faceId;
-                        this.getFaceId(this.props.faceURL2, (result, hasError) => {
-                            if (!hasError) {
-                                faceId2 = result[0].faceId;
-                            }
-                            if (faceId2 !== "") {
-                                this.verifyFace(faceId1, faceId2, (result2, hasError) => {
-                                    if (!hasError) {
-                                        componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence * 100)) + "% confident these two faces are similar.";
-                                    }
-                                });
-                            }
-    
-                        });
-                    }
-    
-                });
+            this.getFaceId(this.props.faceURL1, (result, hasError) => {
+                if (!hasError) {
+                    faceId1 = result[0].faceId;
+                    this.getFaceId(this.props.faceURL2, (result, hasError) => {
+                        if (!hasError) {
+                            faceId2 = result[0].faceId;
+                        }
+                        if (faceId2 !== "") {
+                            this.verifyFace(faceId1, faceId2, (result2, hasError) => {
+                                if (!hasError) {
+                                    componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence * 100)) + "% confident these two faces are similar.";
+                                }
+                            });
+                        }
+
+                    });
+                }
+
+            });
         }
     }
 

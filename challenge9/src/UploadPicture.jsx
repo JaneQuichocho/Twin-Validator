@@ -11,12 +11,25 @@ class UploadPicture extends Component {
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>
                     {!this.props.isCelebrity && (<button ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>)}
-                    <input type="file" ref="fileUpload" />
+                    <input type="file" ref="fileUpload" onChange={(e) => this.handleUploadImage(e)} />
                 </form>
 
             </div>
         );
     }
+
+    handleUploadImage(e) {
+        e.preventDefault();
+        var reader = new FileReader();
+        var componentObject = this;
+        var image = this.refs.uploadImage;
+        reader.onload = function (e) {
+            componentObject.refs.uploadImage.setAttribute('src', e.target.result);
+        }
+        reader.readAsDataURL(this.refs.fileUpload.files[0]);
+        this.refs.textBox.value = "";
+    }
+
     imageExists(url, callback) {
         var image = new Image();
         image.onload = function() { callback(true); };
