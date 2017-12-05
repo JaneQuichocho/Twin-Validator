@@ -14,7 +14,9 @@ class App extends Component {
             isUploading: false,
             hasTwoPictures: false,
             faceURL1: null,
-            faceURL2: null
+            faceURL2: null,
+            isUserImageBlob: null,
+            isCelebImageBlob: null
         }
     }
 
@@ -26,13 +28,13 @@ class App extends Component {
                     <h1 className="App-title">Who's Your Celebrity Doppleganger?</h1>
                 </header>
                 {this.state.isUploading ? (
-                    <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} passFaceURL={(url, isCelebrity) => this.setUrl(url, isCelebrity)} />
+                    <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />
                 ) : (
-                        <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading)} passFaceURL={(faceURL1) => this.setUrl(faceURL1, false)}/>
+                        <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading)} passFaceURL={(faceURL1) => this.setUrl(faceURL1, false, true)}/>
                     )
                 }
-                <UploadPicture isCelebrity={true} passFaceURL={(url, isCelebrity) => this.setUrl(url, isCelebrity)} />
-                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} />
+                <UploadPicture isCelebrity={true} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />
+                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} isUserImageBlob={this.state.isUserImageBlob} isCelebImageBlob={this.state.isCelebImageBlob}/>
             </div>
         );
     }
@@ -41,11 +43,27 @@ class App extends Component {
         this.setState({ isUploading: isUploading })
     }
 
-    setUrl(url, isCelebrity) {
-        if (isCelebrity) { //true
+    setUrl(url, isCelebrity, isBlob) {
+        /*if (isCelebrity) { //true
             this.setState({ faceURL2: url });
         } else {
             this.setState({ faceURL1: url });
+        }
+        if (this.state.faceURL1 && this.state.faceURL2) {
+            this.setState({ hasTwoPictures: true });
+        } else {
+            this.setState({ hasTwoPictures: false });
+        }*/
+        if (!isCelebrity) {
+            this.setState({ 
+                faceURL1: url,
+                isUserImageBlob: isBlob
+            });
+        } else {
+            this.setState({ 
+                faceURL2: url,
+                isCelebImageBlob: isBlob
+            });
         }
         if (this.state.faceURL1 && this.state.faceURL2) {
             this.setState({ hasTwoPictures: true });
