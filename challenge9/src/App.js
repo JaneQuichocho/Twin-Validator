@@ -32,7 +32,7 @@ class App extends Component {
                     )
                 }
                 <UploadPicture isCelebrity={true} passFaceURL={(url, isCelebrity) => this.setUrl(url, isCelebrity)} />
-                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} isUsingBlob={this.state.isUploading}/>
+                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} />
             </div>
         );
     }
