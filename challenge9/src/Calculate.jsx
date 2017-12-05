@@ -22,47 +22,12 @@ class Calculate extends Component {
         e.preventDefault();
         var componentObject = this;
         if (this.props.hasTwoPictures) {
-            if (!this.props.isUserImageBlob && !this.props.isCelebImageBlob) { // 2 URLS
-                this.getFaceId(this.props.faceURL1, (result, hasError) => {
-                    if (!hasError) {
-                        faceId1 = result[0].faceId;
-                        this.getFaceId(this.props.faceURL2, (result, hasError) => {
-                            if (!hasError) {
-                                faceId2 = result[0].faceId;
-                            }
-                            if (faceId2 !== "") {
-                                this.verifyFace(faceId1, faceId2, (result2, hasError) => {
-                                    if (!hasError) {
-                                        componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence * 100)) + "% confident these two faces are similar.";
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            } else if (this.props.isUserImageBlob && !this.props.isCelebImageBlob) {
-                this.getFaceIdFromBlob(this.props.faceURL1, (result, hasError) => {
-                    if (!hasError) {
-                        faceId1 = result[0].faceId;
-                        this.getFaceId(this.props.faceURL2, (result, hasError) => {
-                            if (!hasError) {
-                                faceId2 = result[0].faceId;
-                            }
-                            if (faceId2 !== "") {
-                                this.verifyFace(faceId1, faceId2, (result2, hasError) => {
-                                    if (!hasError) {
-                                        componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence * 100)) + "% confident these two faces are similar.";
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-            }
-            /*this.getFaceId(this.props.faceURL1, (result, hasError) => {
+            console.log("isUserImageBlob: " + this.props.isUserImageBlob);
+            console.log("isCelebImageBlob: " + this.props.isCelebImageBlob);
+            this.getFaceId(this.props.faceURL1, this.props.isUserImageBlob, (result, hasError) => {
                 if (!hasError) {
                     faceId1 = result[0].faceId;
-                    this.getFaceId(this.props.faceURL2, (result, hasError) => {
+                    this.getFaceId(this.props.faceURL2, this.props.isCelebImageBlob, (result, hasError) => {
                         if (!hasError) {
                             faceId2 = result[0].faceId;
                         }
@@ -75,36 +40,29 @@ class Calculate extends Component {
                         }
                     });
                 }
-            });*/
+            });
         }
     }
 
-    getFaceId(imageURL, callback) {
-        var url = URI_BASE + "?" + params;
+    getFaceId(urlOrBlob, isBlob, callback) {
         var headers = new Headers();
+        var contentType = "application/json";
+        var requestBody = JSON.stringify({ url: urlOrBlob });
+        if (isBlob) {
+            contentType = "application/octet-stream";
+            requestBody = urlOrBlob;
+            headers.append("Content-Length", urlOrBlob.size);
+        }
+        
+        var url = URI_BASE + "?" + params;
         headers.append('Ocp-Apim-Subscription-Key', API_KEY);
-        headers.append('Content-Type', 'application/json');
+        headers.append('Content-Type', contentType);
 
         var request = new Request(url, {
             method: "POST",
             headers: headers,
             mode: "cors",
-            body: JSON.stringify({ url: imageURL })
-        })
-        this.APIFetch(request, callback);
-    }
-
-    getFaceIdFromBlob(blob, callback) {
-        var url = URI_BASE + "?" + params;
-        var headers = new Headers();
-        headers.append('Ocp-Apim-Subscription-Key', API_KEY);
-        headers.append('Content-Type', 'application/octet-stream');
-
-        var request = new Request(url, {
-            method: "POST",
-            headers: headers,
-            mode: "cors",
-            body: blob
+            body: requestBody
         })
         this.APIFetch(request, callback);
     }

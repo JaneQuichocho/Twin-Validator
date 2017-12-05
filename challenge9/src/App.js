@@ -44,16 +44,6 @@ class App extends Component {
     }
 
     setUrl(url, isCelebrity, isBlob) {
-        /*if (isCelebrity) { //true
-            this.setState({ faceURL2: url });
-        } else {
-            this.setState({ faceURL1: url });
-        }
-        if (this.state.faceURL1 && this.state.faceURL2) {
-            this.setState({ hasTwoPictures: true });
-        } else {
-            this.setState({ hasTwoPictures: false });
-        }*/
         if (!isCelebrity) {
             this.setState({ 
                 faceURL1: url,

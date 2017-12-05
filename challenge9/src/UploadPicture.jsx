@@ -7,13 +7,13 @@ class UploadPicture extends Component {
         return (
             <div className="col-md-6 col-sm-12">
                 <img id="celebrity" alt="Please upload valid image URL" ref="uploadImage" src="https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1" />
+                <canvas ref="imageHolder" className="hidden"></canvas>
                 <form>
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>
                     {!this.props.isCelebrity && (<button ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>)}
                     <input type="file" ref="fileUpload" onChange={(e) => this.handleUploadImage(e)} />
                 </form>
-
             </div>
         );
     }
@@ -25,9 +25,22 @@ class UploadPicture extends Component {
         var image = this.refs.uploadImage;
         reader.onload = function (e) {
             componentObject.refs.uploadImage.setAttribute('src', e.target.result);
+            componentObject.refs.uploadImage.onload = function(e) {
+                var canvas = componentObject.refs.imageHolder;
+                canvas.setAttribute("width", image.clientWidth);
+                canvas.setAttribute("height", image.clientHeight);
+                var context = canvas.getContext("2d");
+                context.drawImage(image, 0, 0, image.clientWidth, image.clientHeight);
+                var data = canvas.toDataURL("image/png");
+                canvas.toBlob((blob) => {
+                    componentObject.props.passFaceURL(blob, componentObject.props.isCelebrity, true);
+                });
+            }
         }
-        reader.readAsDataURL(this.refs.fileUpload.files[0]);
-        this.refs.textBox.value = "";
+        if (this.refs.fileUpload.files.length !== 0) {
+            reader.readAsDataURL(this.refs.fileUpload.files[0]);
+            this.refs.textBox.value = "";
+        }
     }
 
     imageExists(url, callback) {
