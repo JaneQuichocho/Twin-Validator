@@ -75,7 +75,6 @@ class Camera extends Component {
 
         canvas.toBlob((blob) => {
             this.props.passFaceURL(blob);
-            bob = blob;
         })
         
     }
