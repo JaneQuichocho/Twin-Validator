@@ -6,9 +6,25 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-family: 'Karla', sans-serif;
   height: 100vh;
-  background-color: #666699;
   background-image: url("https://www.transparenttextures.com/patterns/arches.png");
+  background: linear-gradient(117deg, #4fa891, #2c7c94, #6a5fc3);
+  background-size: 600% 600%;
+  
+  -webkit-animation: AnimationName 7s ease infinite;
+  animation: AnimationName 7s ease infinite;
+  
 }
+@-webkit-keyframes AnimationName {
+    0%{background-position:17% 0%}
+    50%{background-position:84% 100%}
+    100%{background-position:17% 0%}
+}
+@keyframes AnimationName { 
+    0%{background-position:17% 0%}
+    50%{background-position:84% 100%}
+    100%{background-position:17% 0%}
+}
+
 .btn {
   margin: 10px;
 }
@@ -60,6 +76,7 @@ body {
   font-family: 'Karla', sans-serif;
   font-weight: bold;
   font-size: 1.5em;
+  margin-top: 10px;
 }
 
 .btn {
@@ -100,18 +117,40 @@ body {
   text-decoration: none;
 }
 
-/* mark {
-  background-color: yellow;
-  color: black;
-} */
+#goBack {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Karla', sans-serif;
+  color: #ffffff;
+  font-size: 11px;
+  background: #7a7a7a;
+  padding: 8px 14px 8px 14px;
+  text-decoration: none;
+  border: none;
+  margin: 0px;
+}
+
+#goBack:hover {
+  background: #575757;
+  text-decoration: none;
+}
+
 
 input[type=file] {
-  
+  margin: 0px;
+  width: 200px;
+  display: inline-block !important;
 }
 
 @media (max-width: 768px) {
   body {
     padding-left: 50px;
     padding-right: 50px;
+  }
+
+  .webcamButton {
+    display: none;
   }
 }
