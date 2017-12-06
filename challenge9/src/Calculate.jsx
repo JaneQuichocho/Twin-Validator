@@ -14,6 +14,7 @@ class Calculate extends Component {
             <div className="buttonDiv">
                 <button ref="calculateButton" onClick={(e) => this.handleCalculateButton(e)} className="btnCalculate">Calculate Similarity!</button>
                 <h4 ref="confidenceLevel"></h4>
+                <progress className="hidden" ref="progress"></progress>
             </div>
         );
     }
@@ -86,14 +87,17 @@ class Calculate extends Component {
         var result = null;
         fetch(request)
             .then((response) => {
+                this.refs.progress.classList.remove("hidden");
                 return response.json();
             })
             .then(function (json) {
+                this.refs.progress.classList.add("hidden");
                 result = json;
                 callback(result, false);
             })
             .catch((error) => {
                 alert("No face detected. Please try again.");
+                this.refs.progress.classList.add("hidden");
                 console.log(error.message);
                 callback(result, true);
             });
