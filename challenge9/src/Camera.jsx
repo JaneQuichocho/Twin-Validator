@@ -8,7 +8,7 @@ class Camera extends Component {
         return (
             <div className="col-md-6 col-sm-12">
                 {this.props.isCelebrity ? (<h3 className="photo">Other Photo</h3>) : (<h3 className="photo">Your Photo</h3>)}
-                <div className="cameraDiv">
+                <div className="cameraDiv" ref="cameraDiv">
                     <video ref="camera" className="camera"></video>
                 </div>
                 <img ref="image" src="" alt="snapshot" className="hidden" />
@@ -33,6 +33,7 @@ class Camera extends Component {
         this.refs.controls1.classList.add("hidden");
         this.refs.controls2.classList.remove("hidden");
         this.refs.takePicButton.classList.remove("hidden");
+        this.refs.cameraDiv.classList.add("remove-background");
         navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(function (stream) {
                 video.srcObject = stream;
@@ -48,6 +49,7 @@ class Camera extends Component {
 
     handleCancelButton(e) {
         e.preventDefault();
+        this.refs.cameraDiv.classList.remove("remove-background");
         var video = this.refs.camera;
         this.props.changeWebcamState(true);
         video.srcObject = null;
