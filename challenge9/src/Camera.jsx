@@ -43,7 +43,6 @@ class Camera extends Component {
             })
             .catch(function (error) {
                 window.alert("Error occured. Please try again.");
-                console.log(error.message);
             }); 
     }
 

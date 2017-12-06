@@ -102,7 +102,6 @@ class Calculate extends Component {
                 alert("No face detected. Please try again.");
                 componentObject.refs.progress.classList.add("hidden");
                 componentObject.refs.confidenceLevel.classList.remove("hidden");
-                console.log(error.message);
                 callback(result, true);
             });
     }
