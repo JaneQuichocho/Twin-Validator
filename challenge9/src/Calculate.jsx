@@ -13,7 +13,7 @@ class Calculate extends Component {
         return (
             <div className="buttonDiv">
                 <button ref="calculateButton" onClick={(e) => this.handleCalculateButton(e)} className="btnCalculate">Calculate Similarity!</button>
-                <h4 ref="confidenceLevel"></h4>
+                <h4 ref="confidenceLevel"></h4><br />
                 <progress className="hidden" ref="progress"></progress>
             </div>
         );
@@ -23,6 +23,8 @@ class Calculate extends Component {
         e.preventDefault();
         var componentObject = this;
         if (this.props.hasTwoPictures) {
+            componentObject.refs.progress.classList.remove("hidden");
+            componentObject.refs.confidenceLevel.classList.add("hidden");
             this.getFaceId(this.props.faceURL1, this.props.isUserImageBlob, (result, hasError) => {
                 if (!hasError) {
                     faceId1 = result[0].faceId;
@@ -88,17 +90,18 @@ class Calculate extends Component {
         var componentObject = this;
         fetch(request)
             .then((response) => {
-                componentObject.refs.progress.classList.remove("hidden");
                 return response.json();
             })
             .then(function (json) {
                 componentObject.refs.progress.classList.add("hidden");
+                componentObject.refs.confidenceLevel.classList.remove("hidden");
                 result = json;
                 callback(result, false);
             })
             .catch((error) => {
                 alert("No face detected. Please try again.");
                 componentObject.refs.progress.classList.add("hidden");
+                componentObject.refs.confidenceLevel.classList.remove("hidden");
                 console.log(error.message);
                 callback(result, true);
             });
