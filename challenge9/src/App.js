@@ -30,11 +30,11 @@ class App extends Component {
                 {this.state.isUploading ? (
                     <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />
                 ) : (
-                        <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading)} passFaceURL={(faceURL1) => this.setUrl(faceURL1, false, true)}/>
+                        <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading)} passFaceURL={(faceURL1) => this.setUrl(faceURL1, false, true)} />
                     )
                 }
                 <UploadPicture isCelebrity={true} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />
-                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} isUserImageBlob={this.state.isUserImageBlob} isCelebImageBlob={this.state.isCelebImageBlob}/>
+                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} isUserImageBlob={this.state.isUserImageBlob} isCelebImageBlob={this.state.isCelebImageBlob} />
             </div>
         );
     }

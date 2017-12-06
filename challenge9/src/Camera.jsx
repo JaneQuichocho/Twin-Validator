@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import UploadPicture from "./UploadPicture";
 
 var localStream;
-var bob;
 class Camera extends Component {
 
     render() {
         return (
             <div className="col-md-6 col-sm-12">
                 <video ref="camera" className="camera"></video>
-                <canvas ref="imageHolder" className="hidden"></canvas>
                 <img ref="image" src="" alt="snapshot" className="hidden" />
                 {this.props.webcamState ? (
                     <div>
@@ -64,7 +61,7 @@ class Camera extends Component {
         });
         this.refs.takePicButton.classList.add("hidden");
 
-        var canvas = this.refs.imageHolder;
+        var canvas = document.createElement("canvas");
         canvas.setAttribute("height", video.clientHeight);
         canvas.setAttribute("width", video.clientWidth);
         var photo = this.refs.image;
