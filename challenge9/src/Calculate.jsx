@@ -22,8 +22,6 @@ class Calculate extends Component {
         e.preventDefault();
         var componentObject = this;
         if (this.props.hasTwoPictures) {
-            console.log("isUserImageBlob: " + this.props.isUserImageBlob);
-            console.log("isCelebImageBlob: " + this.props.isCelebImageBlob);
             this.getFaceId(this.props.faceURL1, this.props.isUserImageBlob, (result, hasError) => {
                 if (!hasError) {
                     faceId1 = result[0].faceId;
@@ -41,6 +39,8 @@ class Calculate extends Component {
                     });
                 }
             });
+        } else {
+            alert("You must upload 2 pictures before performing calculation.");
         }
     }
 
@@ -94,6 +94,7 @@ class Calculate extends Component {
             })
             .catch((error) => {
                 alert("No face detected. Please try again.");
+                console.log(error.message);
                 callback(result, true);
             });
     }

@@ -9,7 +9,7 @@ class UploadPicture extends Component {
                 <form>
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>
-                    {!this.props.isCelebrity && (<button ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>)}
+                    <button ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>
                     <input type="file" ref="fileUpload" onChange={(e) => this.handleUploadImage(e)} />
                 </form>
             </div>
@@ -31,7 +31,7 @@ class UploadPicture extends Component {
                     var context = canvas.getContext("2d");
                     context.drawImage(image, 0, 0, image.clientWidth, image.clientHeight);
                     canvas.toBlob((blob) => {
-                        componentObject.props.passFaceURL(blob, componentObject.props.isCelebrity, true);
+                        componentObject.props.passFaceURL(blob, true);
                     });
                 }
             }
@@ -58,10 +58,10 @@ class UploadPicture extends Component {
             if (exists) {
                 this.refs.uploadImage.src = url;
                 this.refs.textBox.value = "";
-                this.props.passFaceURL(url, this.props.isCelebrity, false);
+                this.props.passFaceURL(url, false);
             } else {
                 alert("Invalid image. Please try again.");
-                this.props.passFaceURL(null, this.props.isCelebrity, false);
+                this.props.passFaceURL(null, false);
             }  
         });
     } 
