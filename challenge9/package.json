@@ -5,6 +5,7 @@
   "homepage": "https://info343a-au17.github.io/team3-challenge9",
   "dependencies": {
     "gh-pages": "^1.1.0",
+    "lint": "^1.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17"
