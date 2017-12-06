@@ -10,8 +10,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isWebcamInactive: true,
-            isUploading: false,
+            isWebcam1Inactive: true,
+            isWebcam2Inactive: true,
+            isUploading1: false,
             hasTwoPictures: false,
             faceURL1: null,
             faceURL2: null,
@@ -21,26 +22,55 @@ class App extends Component {
     }
 
     render() {
+        console.log("isUserImageBlob: " + this.state.isUserImageBlob);
+        console.log("isCelebImageBlob: " + this.state.isCelebImageBlob);
         return (
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">twin validator</h1>
                     <h5 className="App-descr">Think you could have a twin? <i className="em em-woman-with-bunny-ears-partying"></i> Upload your photos and find out!</h5>
                 </header>
-                {this.state.isUploading ? (
-                    <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />
+                {this.state.isUploading1 ? (
+                    <UploadPicture 
+                        goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading, true)} passFaceURL={(url, isBlob) => this.setUrl(url, false, isBlob)} 
+                    />
                 ) : (
-                        <Camera onClick={(webcamState) => this.changeWebcamState(webcamState)} webcamState={this.state.isWebcamInactive} useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading)} passFaceURL={(faceURL1) => this.setUrl(faceURL1, false, true)} />
+                        <Camera 
+                            changeWebcamState={(webcamState) => this.changeWebcamState(webcamState, true)}webcamState={this.state.isWebcam1Inactive} 
+                            useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading, true)} 
+                            passFaceURL={(url) => this.setUrl(url, false, true)} isOtherCameraOn={!this.state.isWebcam2Inactive}
+                        />
                     )
                 }
-                <UploadPicture isCelebrity={true} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />
-                <Calculate hasTwoPictures={this.state.hasTwoPictures} faceURL1={this.state.faceURL1} faceURL2={this.state.faceURL2} isUserImageBlob={this.state.isUserImageBlob} isCelebImageBlob={this.state.isCelebImageBlob} />
+                {this.state.isUploading2 ? (
+                    <UploadPicture 
+                        goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading, false)}
+                        passFaceURL={(url, isBlob) => this.setUrl(url, true, isBlob)} 
+                    />
+                ) : (
+                    <Camera 
+                        changeWebcamState={(webcamState) => this.changeWebcamState(webcamState, false)} webcamState={this.state.isWebcam2Inactive} 
+                        useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading, false)} passFaceURL={(url) => this.setUrl(url, true, true)} 
+                        isOtherCameraOn={!this.state.isWebcam1Inactive}
+                    />
+                )}
+                <Calculate 
+                    hasTwoPictures={this.state.hasTwoPictures} 
+                    faceURL1={this.state.faceURL1} 
+                    faceURL2={this.state.faceURL2} 
+                    isUserImageBlob={this.state.isUserImageBlob} 
+                    isCelebImageBlob={this.state.isCelebImageBlob} 
+                />
             </div>
         );
     }
 
-    useUploadedPicture(isUploading) {
-        this.setState({ isUploading: isUploading })
+    useUploadedPicture(isUploading, isUser) {
+        if (isUser) {
+            this.setState({ isUploading1: isUploading });
+        } else {
+            this.setState({ isUploading2: isUploading });
+        }
     }
 
     setUrl(url, isCelebrity, isBlob) {
@@ -62,10 +92,16 @@ class App extends Component {
         }
     }
 
-  changeWebcamState(webcamState) {
-    this.setState({
-      isWebcamInactive: webcamState
-    });
+  changeWebcamState(webcamState, isUser) {
+    if (isUser) {
+        this.setState({
+            isWebcam1Inactive: webcamState
+        });
+    } else {
+        this.setState({
+            isWebcam2Inactive: webcamState
+        });
+    }
   }
 }
 export default App;
