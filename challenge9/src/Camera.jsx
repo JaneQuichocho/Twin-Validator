@@ -6,7 +6,10 @@ class Camera extends Component {
     render() {
         return (
             <div className="col-md-6 col-sm-12">
+    <h3 className="photo">Your Photo</h3>
+                <div className="cameraDiv">
                 <video ref="camera" className="camera"></video>
+                </div>
                 <img ref="image" src="" alt="snapshot" className="hidden" />
                 {this.props.webcamState ? (
                     <div>

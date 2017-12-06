@@ -11,9 +11,9 @@ class Calculate extends Component {
 
     render() {
         return (
-            <div>
-                <button ref="calculateButton" onClick={(e) => this.handleCalculateButton(e)} className="btn btn-success">Calculate Similarity!</button>
-                <h4 ref="confidenceLevel">We are % confident that these two faces are similar.</h4>
+            <div className="buttonDiv">
+                <button ref="calculateButton" onClick={(e) => this.handleCalculateButton(e)} className="btnCalculate">Calculate Similarity!</button>
+                <h4 ref="confidenceLevel"></h4>
             </div>
         );
     }
@@ -34,7 +34,7 @@ class Calculate extends Component {
                         if (faceId2 !== "") {
                             this.verifyFace(faceId1, faceId2, (result2, hasError) => {
                                 if (!hasError) {
-                                    componentObject.refs.confidenceLevel.textContent = "We are " + (Math.round(result2.confidence * 100)) + "% confident these two faces are similar.";
+                                    componentObject.refs.confidenceLevel.innerHTML = "There's a <span class=\"confidencePercentage\">" + (Math.round(result2.confidence * 100)) + "%</span> chance that you could pass off as twins.";
                                 }
                             });
                         }
