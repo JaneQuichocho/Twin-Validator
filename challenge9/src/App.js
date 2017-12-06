@@ -22,8 +22,7 @@ class App extends Component {
     }
 
     render() {
-        console.log("isUserImageBlob: " + this.state.isUserImageBlob);
-        console.log("isCelebImageBlob: " + this.state.isCelebImageBlob);
+        
         return (
             <div className="App">
                 <header className="App-header">
