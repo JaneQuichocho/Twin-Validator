@@ -14,13 +14,13 @@ class Camera extends Component {
                 <img ref="image" src="" alt="snapshot" className="hidden" />
                 <div ref="controls1">
                     {!this.props.isOtherCameraOn && (
-                        <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
+                        <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary webcamButton">Use Webcam</button>
                     )}
-                    <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Input Picture URL</button>
+                    <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Upload Photo</button>
                 </div>
                 <div ref="controls2" className="hidden">
                     <button ref="cancelButton" onClick={(e) => this.handleCancelButton(e)} className="btn btn-default">Cancel</button>
-                    <button ref="takePicButton" onClick={(e) => this.handleTakePicButton(e)} className="btn btn-default">Take Picture</button>
+                    <button ref="takePicButton" onClick={(e) => this.handleTakePicButton(e)} className="btn btn-default">Take Photo</button>
                 </div>
             </div>
         );
