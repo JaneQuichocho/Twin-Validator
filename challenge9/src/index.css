@@ -3,6 +3,7 @@ body {
   padding-left: 250px;
   padding-right: 250px;
   padding-top: 70px;
+  padding-bottom: 70px;
   font-family: 'Open Sans', sans-serif;
   font-family: 'Karla', sans-serif;
   height: 100vh;
@@ -144,6 +145,12 @@ input[type=file] {
 progress {
   width: 30%;
   height: 4px;
+}
+
+#footer {
+  text-align: center;
+  color: black;
+  padding-top: 7px;
 }
 
 @media (max-width: 768px) {
