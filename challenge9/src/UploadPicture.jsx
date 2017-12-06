@@ -4,7 +4,8 @@ class UploadPicture extends Component {
     render() {
         return (
             <div className="col-md-6 col-sm-12">
-                <img id="celebrity" alt="face" ref="uploadImage" src="https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1"/>
+                {this.props.isCelebrity ? (<h3 className="photo">Other Photo</h3>) : (<h3 className="photo">Your Photo</h3>)}
+                <div className="cameraDiv"><img id="celebrity" alt="Please upload valid image URL" ref="uploadImage" src="https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1"/></div>
                 <form>
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>

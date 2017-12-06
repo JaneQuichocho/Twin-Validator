@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Camera from "./Camera";
 import UploadPicture from "./UploadPicture";
@@ -24,8 +23,8 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Who's Your Celebrity Doppleganger?</h1>
+                    <h1 className="App-title">twin validator</h1>
+                    <h5 className="App-descr">Think you and your friend could be twins? <i className="em em-woman-with-bunny-ears-partying"></i> Upload your photos and find out!</h5>
                 </header>
                 {this.state.isUploading ? (
                     <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />

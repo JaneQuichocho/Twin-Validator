@@ -1,28 +1,41 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  background-color: white;
+  height: 100%;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-color: white;
+  height: 130px;
+  padding: 10px;
+  color: black;
+  font-size: 25px;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-family: 'Josefin Sans', sans-serif; 
+  font-size: 1.7em;
 }
 
 .App-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App-descr {
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Karla', sans-serif;
+  font-size: 0.6em;
+}
+
+@media (max-width: 900px) {
+  .App-header {
+    height: 200px;
+    font-size: 25px;
+  }
 }
