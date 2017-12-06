@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 
-var localStream;
-
 class UploadPicture extends Component {
     render() {
         return (
             <div className="col-md-6 col-sm-12">
-                <img id="celebrity" alt="Please upload valid image URL" ref="uploadImage" src="https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1" />
-                <canvas ref="imageHolder" className="hidden"></canvas>
+                <img id="celebrity" alt="face" ref="uploadImage" src="https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1"/>
                 <form>
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>
@@ -26,21 +23,23 @@ class UploadPicture extends Component {
         reader.onload = function (e) {
             componentObject.refs.uploadImage.setAttribute('src', e.target.result);
             componentObject.refs.uploadImage.onload = function(e) {
-                var canvas = componentObject.refs.imageHolder;
-                canvas.setAttribute("width", image.clientWidth);
-                canvas.setAttribute("height", image.clientHeight);
-                var context = canvas.getContext("2d");
-                context.drawImage(image, 0, 0, image.clientWidth, image.clientHeight);
-                var data = canvas.toDataURL("image/png");
-                canvas.toBlob((blob) => {
-                    componentObject.props.passFaceURL(blob, componentObject.props.isCelebrity, true);
-                });
+                if (componentObject.refs.fileUpload.value !== "") {
+                    var canvas = document.createElement("canvas");
+                    canvas.setAttribute("width", image.clientWidth);
+                    canvas.setAttribute("height", image.clientHeight);
+                    var context = canvas.getContext("2d");
+                    context.drawImage(image, 0, 0, image.clientWidth, image.clientHeight);
+                    canvas.toBlob((blob) => {
+                        componentObject.props.passFaceURL(blob, componentObject.props.isCelebrity, true);
+                    });
+                }
             }
         }
         if (this.refs.fileUpload.files.length !== 0) {
             reader.readAsDataURL(this.refs.fileUpload.files[0]);
             this.refs.textBox.value = "";
         }
+        // }
     }
 
     imageExists(url, callback) {
@@ -53,6 +52,7 @@ class UploadPicture extends Component {
     handleUploadButton(e) {
         e.preventDefault();
         var url = this.refs.textBox.value;
+        this.refs.fileUpload.value = "";
         this.imageExists(url, (exists) => {
             if (exists) {
                 this.refs.uploadImage.src = url;
@@ -64,6 +64,7 @@ class UploadPicture extends Component {
             }  
         });
     } 
+
     handleGoBackButton(e) {
         e.preventDefault();
         this.props.goBackToWebcam(false);
