@@ -30,13 +30,14 @@ body {
 }
 
 .camera {
-  background-color: lightgray;
-  width: 100%;
-  height: 100%;
+  background-color: clear;
+  height: 375px;
+  width: 400px;
   margin: auto;
   padding: 0px;
-  background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");
-  background-size: contain;
+  /*background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");
+  background-size: 400px 375px;
+  overflow: hidden;*/
 } 
 
 
@@ -58,11 +59,15 @@ body {
 }
 
 .cameraDiv {
-  height: 375px;
-  width: 400px;
+  /*height: 375px;
+  width: 400px;*/
+  width: 100%;
+  /*height: 60%;*/
   margin-bottom: 15px;
   padding: 0px;
-  /*background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");*/
+  background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");
+  background-size: cover;
+  background-position: center;
 }
 
 .cameraDiv img {
