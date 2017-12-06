@@ -36,6 +36,8 @@ class Calculate extends Component {
                             this.verifyFace(faceId1, faceId2, (result2, hasError) => {
                                 if (!hasError) {
                                     componentObject.refs.confidenceLevel.innerHTML = "There's a <span class=\"confidencePercentage\">" + (Math.round(result2.confidence * 100)) + "%</span> chance that you could pass off as twins.";
+                                    componentObject.refs.progress.classList.add("hidden");
+                                    componentObject.refs.confidenceLevel.classList.remove("hidden");
                                 }
                             });
                         }
@@ -93,8 +95,6 @@ class Calculate extends Component {
                 return response.json();
             })
             .then(function (json) {
-                componentObject.refs.progress.classList.add("hidden");
-                componentObject.refs.confidenceLevel.classList.remove("hidden");
                 result = json;
                 callback(result, false);
             })
