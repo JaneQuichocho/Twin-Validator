@@ -85,19 +85,20 @@ class Calculate extends Component {
 
     APIFetch(request, callback) {
         var result = null;
+        var componentObject = this;
         fetch(request)
             .then((response) => {
-                this.refs.progress.classList.remove("hidden");
+                componentObject.refs.progress.classList.remove("hidden");
                 return response.json();
             })
             .then(function (json) {
-                this.refs.progress.classList.add("hidden");
+                componentObject.refs.progress.classList.add("hidden");
                 result = json;
                 callback(result, false);
             })
             .catch((error) => {
                 alert("No face detected. Please try again.");
-                this.refs.progress.classList.add("hidden");
+                componentObject.refs.progress.classList.add("hidden");
                 console.log(error.message);
                 callback(result, true);
             });
