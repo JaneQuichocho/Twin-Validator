@@ -10,7 +10,7 @@ class UploadPicture extends Component {
                     <input type="text" ref="textBox" placeholder="Image URL" />
                     <button ref="SubmitButton" type="submit" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit</button>
                     <input type="file" ref="fileUpload" onChange={(e) => this.handleUploadImage(e)} />
-                    {!this.props.isCelebrity && (<button id="goBack" ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>)}
+                    <button id="goBack" ref="GoBack" type="goBack" onClick={(e) => this.handleGoBackButton(e)} className="btn btn-primary">Go Back to Webcam</button>
                 </form>
             </div>
         );
