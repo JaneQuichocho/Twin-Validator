@@ -7,7 +7,7 @@ class Camera extends Component {
     render() {
         return (
             <div className="col-md-6 col-sm-12">
-                <h3 className="photo">Your Photo</h3>
+                {this.props.isCelebrity ? (<h3 className="photo">Other Photo</h3>) : (<h3 className="photo">Your Photo</h3>)}
                 <div className="cameraDiv">
                     <video ref="camera" className="camera"></video>
                 </div>
