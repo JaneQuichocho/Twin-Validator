@@ -13,8 +13,8 @@ class Camera extends Component {
                 <img ref="image" src="" alt="snapshot" className="hidden" />
                 {this.props.webcamState ? (
                     <div>
-                        <button ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
-                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Input Picture URL</button>
+                        <button className="webcamButton" ref="webcamButton" onClick={(e) => this.handleWebcamButton(e)} className="btn btn-primary">Use Webcam</button>
+                        <button ref="uploadPicButton" onClick={(e) => this.handleUploadButton(e)} className="btn btn-primary">Submit Picture</button>
                     </div>
                 ) : (
                         <div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import "./index.css"
 import Camera from "./Camera";
 import UploadPicture from "./UploadPicture";
 import Calculate from "./Calculate";
@@ -24,7 +25,7 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">twin validator</h1>
-                    <h5 className="App-descr">Think you and your friend could be twins? <i className="em em-woman-with-bunny-ears-partying"></i> Upload your photos and find out!</h5>
+                    <h5 className="App-descr">Think you could have a twin? <i className="em em-woman-with-bunny-ears-partying"></i> Upload your photos and find out!</h5>
                 </header>
                 {this.state.isUploading ? (
                     <UploadPicture goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading)} isCelebrity={false} passFaceURL={(url, isCelebrity, isBlob) => this.setUrl(url, isCelebrity, isBlob)} />

@@ -9,13 +9,14 @@
 
 .App-header {
   background-color: white;
-  height: 130px;
+  height: 120px;
   padding: 10px;
   color: black;
   font-size: 25px;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 28px;
+  margin-bottom: 0px;
 }
 
 .App-title {
