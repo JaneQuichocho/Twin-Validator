@@ -36,7 +36,7 @@ body {
   margin: auto;
   padding: 0px;
   background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");
-  background-size: 100%;
+  background-size: contain;
 } 
 
 
@@ -58,12 +58,11 @@ body {
 }
 
 .cameraDiv {
-  /* height: 375px;
-  width: 500px; */
+  height: 375px;
+  width: 400px;
   margin-bottom: 15px;
   padding: 0px;
-  background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");
-  background-size: 100%;
+  /*background-image: url("https://www.eldersinsurance.com.au/images/person1.png?width=368&height=278&crop=1");*/
 }
 
 .cameraDiv img {

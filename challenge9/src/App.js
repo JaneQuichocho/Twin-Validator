@@ -32,13 +32,15 @@ class App extends Component {
                 </header>
                 {this.state.isUploading1 ? (
                     <UploadPicture 
-                        goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading, true)} passFaceURL={(url, isBlob) => this.setUrl(url, false, isBlob)} 
+                        goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading, true)} passFaceURL={(url, isBlob) => this.setUrl(url, false, isBlob)}
+                        isCelebrity={false}
                     />
                 ) : (
                         <Camera 
                             changeWebcamState={(webcamState) => this.changeWebcamState(webcamState, true)}webcamState={this.state.isWebcam1Inactive} 
                             useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading, true)} 
                             passFaceURL={(url) => this.setUrl(url, false, true)} isOtherCameraOn={!this.state.isWebcam2Inactive}
+                            isCelebrity={false}
                         />
                     )
                 }
@@ -46,12 +48,14 @@ class App extends Component {
                     <UploadPicture 
                         goBackToWebcam={(isUploading) => this.useUploadedPicture(isUploading, false)}
                         passFaceURL={(url, isBlob) => this.setUrl(url, true, isBlob)} 
+                        isCelebrity={true}
                     />
                 ) : (
                     <Camera 
                         changeWebcamState={(webcamState) => this.changeWebcamState(webcamState, false)} webcamState={this.state.isWebcam2Inactive} 
                         useUploadedPicture={(isUploading) => this.useUploadedPicture(isUploading, false)} passFaceURL={(url) => this.setUrl(url, true, true)} 
                         isOtherCameraOn={!this.state.isWebcam1Inactive}
+                        isCelebrity={true}
                     />
                 )}
                 <Calculate 
