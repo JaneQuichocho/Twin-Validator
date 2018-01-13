@@ -1,20 +1,15 @@
-# team3-challenge9
+# Twin Validator
 
-## Team Members
+### Team Members
+- Jane Quichocho
 - Ellani Johnson
 - Stephanie Lim
-- Jane Quichocho
  
-#### A short description of our project. 
+#### A Short Description of Our Project 
 
-##### What will our app do? 
-Our web application will use the Microsoft Azure Face API (https://azure.microsoft.com/en-us/services/cognitive-services/face/) and a Webcam API to compare a picture the user takes on his/her webcam to a picture of a celebrity they upload to the site. The user will upload a photo by providing an absolute url to the photo or choosing a photo stored on their computer.
+#### What will our app do? 
+Our web application will use the Microsoft Azure Face API and the WebRTC API to compare two faces, giving a percentage on how much they look alike. The user can upload pictures by providing a url, selecting an image from their computer, or snapping a photo on their webcam. This app will work on both desktop and mobile.
 
-##### Who would use our app?
-Anyone who wants to find his/her celebrity Doppelgänger and test out how much they look alike.
-
-##### What are its main features?
-Comparing two pictures and giving a percentage of their facial similarity.
-
-##### The list of libraries, frameworks, APIs we will use:
-Microsoft Azure API,Webcam API, Bootstrap, React
+#### The list of libraries, frameworks, APIs we will use:
+* Microsoft Azure Face API
+* Webcam API, Bootstrap, React
