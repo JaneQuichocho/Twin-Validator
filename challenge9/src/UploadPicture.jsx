@@ -40,7 +40,6 @@ class UploadPicture extends Component {
             reader.readAsDataURL(this.refs.fileUpload.files[0]);
             this.refs.textBox.value = "";
         }
-        // }
     }
 
     imageExists(url, callback) {

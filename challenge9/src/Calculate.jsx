@@ -25,17 +25,17 @@ class Calculate extends Component {
         if (this.props.hasTwoPictures) {
             componentObject.refs.progress.classList.remove("hidden");
             componentObject.refs.confidenceLevel.classList.add("hidden");
-            this.getFaceId(this.props.faceURL1, this.props.isUserImageBlob, (result, hasError) => {
+            this.getFaceId(this.props.faceURL1, this.props.isUserImageBlob, (result1, hasError) => {
                 if (!hasError) {
-                    faceId1 = result[0].faceId;
-                    this.getFaceId(this.props.faceURL2, this.props.isCelebImageBlob, (result, hasError) => {
+                    faceId1 = result1[0].faceId;
+                    this.getFaceId(this.props.faceURL2, this.props.isCelebImageBlob, (result2, hasError) => {
                         if (!hasError) {
-                            faceId2 = result[0].faceId;
+                            faceId2 = result2[0].faceId;
                         }
                         if (faceId2 !== "") {
-                            this.verifyFace(faceId1, faceId2, (result2, hasError) => {
+                            this.verifyFace(faceId1, faceId2, (result3, hasError) => {
                                 if (!hasError) {
-                                    componentObject.refs.confidenceLevel.innerHTML = "There's a <span class=\"confidencePercentage\">" + (Math.round(result2.confidence * 100)) + "%</span> chance that you could pass off as twins.";
+                                    componentObject.refs.confidenceLevel.innerHTML = "There's a <span class=\"confidencePercentage\">" + (Math.round(result3.confidence * 100)) + "%</span> chance that you could pass off as twins.";
                                     componentObject.refs.progress.classList.add("hidden");
                                     componentObject.refs.confidenceLevel.classList.remove("hidden");
                                 }
