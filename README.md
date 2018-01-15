@@ -1,5 +1,4 @@
 # Twin Validator
-https://info343a-au17.github.io/team3-challenge9/challenge9
 
 ### Team Members
 - Jane Quichocho
